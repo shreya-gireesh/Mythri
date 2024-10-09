@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime, date
 from django.contrib import messages
+from django.db.models import Count
 from UserApp.forms import *
 from UserApp.models import *
 
@@ -78,7 +79,7 @@ def membership_form(request):
                 messages.success(request, 'Member added successfully. Add a new member.')
                 return redirect('membership-form')  # Reload the form to add a new member
             elif 'submit' in request.POST:
-                return redirect('/')  # Redirect to the homepage
+                return redirect('membership-form')  # Redirect to the homepage
     else:
         form = MembershipForm()
     return render(request, 'create.html', {'username': admin_name,'form': form, 'limit_exceeded': limit_exceeded})
@@ -335,17 +336,21 @@ def unitspage(request, unit_id):
     president = allmembers.filter(user_role__user_role='President')
     vice_president = allmembers.filter(user_role__user_role='Vice President')
     secretary = allmembers.filter(user_role__user_role='Secretary')
+    jointsecretary = allmembers.filter(user_role__user_role='Joint Secretary')
     treasurer = allmembers.filter(user_role__user_role='Treasurer')
     members = allmembers.filter(user_role__user_role='Member')
+
     if request.method == 'POST':
         # Populate the form with POST data and the current unit instance
         form = UnitForm(request.POST, instance=unit)
-
         # Validate the form
         if form.is_valid():
+            unit_form = form.save(commit=False)
+
+            unit_form.created_by = admin
             # Save the form, which will update the unit
             form.save()
-            return redirect('/')  # Redirect to the appropriate page after saving
+            return redirect('units')  # Redirect to the appropriate page after saving
     else:
         # If not posting, just populate the form with the unit instance for editing
         form = UnitForm(instance=unit)
@@ -354,10 +359,10 @@ def unitspage(request, unit_id):
         'president': president,
         'vice_president': vice_president,
         'secretary':secretary,
+        'joint_secretary':jointsecretary,
         'treasurer':treasurer,
         'members': members,
         'username': admin_name
-
     }
     # Render the form and pass it to the template
     return render(request, 'unitpage.html', context)
@@ -372,11 +377,10 @@ def report(request):
         admin_name = f"{admin.user_first_name} {admin.user_last_name}"
     else:
         admin_name = f"{admin.user_first_name}"
-    units = UnitModel.objects.all()
+    units = UnitModel.objects.annotate(total_members=Count('membermodel'))
     zones = ZoneModel.objects.all()
     regions = RegionModel.objects.all()
     areas = AreaModel.objects.all()
-
     zone = request.GET.get('zone')
     region = request.GET.get('region')
     area = request.GET.get('area')

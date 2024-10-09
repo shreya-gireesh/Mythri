@@ -13,6 +13,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
@@ -218,13 +220,13 @@
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Units</h6>
-
+                                     <button id="download-pdf" class="btn btn-primary">Download PDF</button>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     {% if units %}
-                                  <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
+                                  <div id="table-container" class="table-responsive">
+                                    <table id="my-table" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Sr No</th>
@@ -233,8 +235,8 @@
                                                 <th scope="col">Zone</th>
                                                 <th scope="col">Region</th>
                                                 <th scope="col">Area</th>
-                                                <th scope="col">Admin</th>
-                                                <th scope="col">Created at</th>
+                                                <th scope="col">Created by</th>
+                                                <th scope="col">Members</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -242,9 +244,7 @@
                                                 <tr>
                                                     <th scope="row">{{ forloop.counter }}</th>
                                                     <td>
-                                                        <a href="{% url 'unitpage' unit.unit_id %}">
-                                                                {{ unit.affliation_number }}
-                                                            </a>
+                                                        {{ unit.affliation_number }}
                                                     </td>
                                                     <td>{{ unit.unit_name }}</td>
                                                     <td>{{ unit.zone.zone_name }}</td>
@@ -252,7 +252,7 @@
                                                     <td>{{ unit.area.area_name }}</td>
                                                     <td>{{ unit.created_by.user_first_name }}</td>
 
-                                                    <td>{{ unit.created_at }}</td>
+                                                    <td>{{ unit.total_members }}</td>
                                                 </tr>
 
                                             {% endfor %}
@@ -260,10 +260,10 @@
                                     </table>
                                   </div>
                                     {% else %}
-<div class="alert alert-warning" role="alert">
-    No units found.
-</div>
-{% endif %}
+                                    <div class="alert alert-warning" role="alert">
+                                        No units found.
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -324,6 +324,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
@@ -340,6 +341,45 @@
     <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
     <script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
 
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            const element = document.getElementById('table-container');
+            html2pdf(element, {
+                margin: 0.2,
+                filename: 'report.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+            });
+        });
+    </script>
+<!--    <script>-->
+<!--    document.getElementById("downloadBtn").addEventListener("click", function () {-->
+<!--        var table = document.getElementById("unitsTable");-->
+<!--        if (!table) return; // Check if the table exists-->
+
+<!--        var csv = [];-->
+<!--        var rows = table.querySelectorAll("tr");-->
+
+<!--        for (var i = 0; i < rows.length; i++) {-->
+<!--            var row = [], cols = rows[i].querySelectorAll("td, th");-->
+<!--            for (var j = 0; j < cols.length; j++) {-->
+<!--                row.push(cols[j].innerText);-->
+<!--            }-->
+<!--            csv.push(row.join(",")); // Join columns with a comma-->
+<!--        }-->
+
+<!--        // Create a CSV file-->
+<!--        var csvFile = new Blob([csv.join("\n")], { type: "text/csv" });-->
+<!--        var downloadLink = document.createElement("a");-->
+<!--        downloadLink.href = URL.createObjectURL(csvFile);-->
+<!--        downloadLink.download = "units_report.csv"; // Filename-->
+
+<!--        document.body.appendChild(downloadLink);-->
+<!--        downloadLink.click(); // Trigger download-->
+<!--        document.body.removeChild(downloadLink); // Clean up-->
+<!--    });-->
+<!--</script>-->
 </body>
 
 </html>

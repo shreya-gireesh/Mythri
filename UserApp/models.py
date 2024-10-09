@@ -107,15 +107,15 @@ class MemberModel(models.Model):
     member_id =models.AutoField(primary_key = True)
     admission_no = models.CharField(max_length=100)
     member_name = models.CharField(max_length=100)
-    mailid = models.EmailField()
-    gender = models.ForeignKey(GenderModel, on_delete=models.SET_NULL, null=True)
-    mobile_no = models.CharField(max_length=50)
-    whatsapp_no = models.CharField(max_length=50)
-    address = models.CharField(max_length=100)
-    pincode = models.CharField(max_length=10)
-    dob = models.DateField()
-    blood_group = models.ForeignKey(BloodGroupModel, on_delete=models.SET_NULL, null=True)
-    employment = models.CharField(max_length=100)
+    mailid = models.EmailField(null=True, blank=True)
+    gender = models.ForeignKey(GenderModel, on_delete=models.SET_NULL, null=True, blank=True)
+    mobile_no = models.CharField(max_length=50, null=True, blank=True)
+    whatsapp_no = models.CharField(max_length=50, null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+    pincode = models.CharField(max_length=10, null=True, blank=True)
+    dob = models.DateField(null=True, blank=True)
+    blood_group = models.ForeignKey(BloodGroupModel, on_delete=models.SET_NULL, null=True, blank=True)
+    employment = models.CharField(max_length=100, null=True, blank=True)
     unit = models.ForeignKey(UnitModel, on_delete=models.SET_NULL, null=True, blank=True)
     user_role = models.ForeignKey(UserRole, on_delete=models.SET_NULL, null=True, blank=True)
     nominee_name = models.CharField(max_length=100, null=True, blank=True)
@@ -127,6 +127,10 @@ class MemberModel(models.Model):
 
     def __str__(self):
         return self.member_name
+
+    def total_members(self):
+        # Count members related to this unit via MemberModel
+        return MemberModel.objects.filter(unit=self).count()
 
 class MemberFamilyModel(models.Model):
     family_id = models.AutoField(primary_key = True)

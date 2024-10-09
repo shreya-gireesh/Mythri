@@ -28,7 +28,7 @@
             background-repeat: no-repeat;
         }
         .icon-box{
-
+            border: 1px solid #fff;
             height: 50px;
             width: 50px;
             border-radius: 50%;
@@ -153,13 +153,13 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="members">
-                    <i class="fas fa-fw fa-user-plus"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>All Members</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="units">
-                    <i class="fas fa-fw fa-user-plus"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>All Units</span>
                 </a>
             </li>
@@ -269,15 +269,15 @@
                         </div>
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card rounded-lg shadow-lg h-100 detail-card">
+                            <div class="card bg-gradient-unit rounded-lg shadow-lg h-100 detail-card">
                                 <div class="row h-100 no-gutters">
                                     <div class="col-lg-4 d-flex justify-content-center align-items-center h-100" >
-                                        <div class="icon-box bg-gradient-unit d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
+                                        <div class="icon-box  d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
                                             <i class="fas fa-fw fa-users"></i>
                                         </div>
                                     </div>
                                     <div class="col-lg-8 w-100 d-flex align-items-center">
-                                        <div>
+                                        <div class="text-white">
                                         <h6 class="text-uppercase font-weight-bold mb-2">All Units</h6>
                                         <div class="h4 mb-0 font-weight-bold">{{total_unit}}</div>
                                         </div>
@@ -288,15 +288,15 @@
 
 
                         <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card rounded-lg shadow-lg h-100 detail-card">
+                            <div class="card bg-gradient-member rounded-lg shadow-lg h-100 detail-card">
                                 <div class="row h-100 no-gutters">
                                     <div class="col-lg-4 d-flex justify-content-center align-items-center h-100" >
-                                        <div class="icon-box bg-gradient-member d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
+                                        <div class="icon-box  d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
                                             <i class="fas fa-fw fa-user"></i>
                                         </div>
                                     </div>
                                     <div class="col-lg-8 w-100 d-flex align-items-center">
-                                        <div>
+                                        <div class="text-white">
                                         <h6 class="text-uppercase font-weight-bold mb-2">All Members</h6>
                                         <div class="h4 mb-0 font-weight-bold">{{total_members}}</div>
                                         </div>
@@ -313,15 +313,15 @@
                     <div class="row">
 
                         <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card rounded-lg shadow-lg p-3 h-100 detail-card">
+                            <div class="card bg-gradient-zone rounded-lg shadow-lg p-3 h-100 detail-card">
                                 <div class="row h-100 no-gutters">
                                     <div class="col-lg-4 d-flex justify-content-center align-items-center h-100" >
-                                        <div class="icon-box bg-gradient-zone d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
+                                        <div class="icon-box  d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
                                             <i class="fas fa-fw fa-map-marker-alt"></i>
                                         </div>
                                     </div>
                                     <div class="col-lg-8 w-100 d-flex align-items-center">
-                                        <div>
+                                        <div class="text-white">
                                         <h6 class="text-uppercase font-weight-bold mb-2">All Zones</h6>
                                         <div class="h4 mb-0 font-weight-bold">{{zone_counts}}</div>
                                         </div>
@@ -331,15 +331,15 @@
                         </div>
 
                         <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card rounded-lg shadow-lg p-3 h-100 detail-card">
+                            <div class="card bg-gradient-region rounded-lg shadow-lg p-3 h-100 detail-card">
                                 <div class="row h-100 no-gutters">
                                     <div class="col-lg-4 d-flex justify-content-center align-items-center h-100" >
-                                        <div class="icon-box bg-gradient-region d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
+                                        <div class="icon-box  d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
                                             <i class="fas fa-fw fa-map-pin"></i>
                                         </div>
                                     </div>
                                     <div class="col-lg-8 w-100 d-flex align-items-center">
-                                        <div>
+                                        <div class="text-white">
                                         <h6 class="text-uppercase font-weight-bold mb-2">All Regions</h6>
                                         <div class="h4 mb-0 font-weight-bold">{{region_counts}}</div>
                                         </div>
@@ -349,15 +349,15 @@
                         </div>
 
                         <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card rounded-lg shadow-lg p-3 h-100 detail-card">
+                            <div class="card bg-gradient-area rounded-lg shadow-lg p-3 h-100 detail-card">
                                 <div class="row h-100 no-gutters">
                                     <div class="col-lg-4 d-flex justify-content-center align-items-center h-100" >
-                                        <div class="icon-box bg-gradient-area d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
+                                        <div class="icon-box  d-flex justify-content-center align-items-center" style="font-size: 24px; color: white;">
                                             <i class="fas fa-fw fa-map-signs"></i>
                                         </div>
                                     </div>
                                     <div class="col-lg-8 w-100 d-flex align-items-center">
-                                        <div>
+                                        <div class="text-white">
                                         <h6 class="text-uppercase font-weight-bold mb-2">All Areas</h6>
                                         <div class="h4 mb-0 font-weight-bold">{{area_counts}}</div>
                                         </div>
