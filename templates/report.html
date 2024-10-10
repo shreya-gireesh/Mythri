@@ -237,6 +237,7 @@
                                                 <th scope="col">Area</th>
                                                 <th scope="col">Created by</th>
                                                 <th scope="col">Members</th>
+                                                <th scope="col">Created on</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -253,6 +254,7 @@
                                                     <td>{{ unit.created_by.user_first_name }}</td>
 
                                                     <td>{{ unit.total_members }}</td>
+                                                    <td>{{ unit.created_at }}</td>
                                                 </tr>
 
                                             {% endfor %}
@@ -349,7 +351,7 @@
                 filename: 'report.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+                jsPDF: { unit: 'in', format: 'a3', orientation: 'landscape' }
             });
         });
     </script>
